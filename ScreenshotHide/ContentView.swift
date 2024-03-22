@@ -9,13 +9,33 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        NavigationStack {
+            List {
+                NavigationLink {
+                    ScreenShotPreventView() {
+                        GeometryReader {
+                            let size = $0.size
+                            Image(.profile)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: size.width, height: size.height)
+                                .clipShape(.rect(topLeadingRadius: 35, bottomTrailingRadius: 35))
+
+                        }
+
+                    }
+                } label: {
+                    Text("Show Image")
+                }
+
+                NavigationLink {
+
+                } label: {
+                    Text("Show Security Key")
+                }
+
+            }
+        }.navigationTitle("My List")
     }
 }
 
